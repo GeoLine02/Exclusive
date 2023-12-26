@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { decodeToken } from "../../utils";
+import { decodeToken, toggleStorage } from "../../utils";
 type InitialStateType = {
   isLogedIn: boolean;
   user: string | null;
@@ -21,6 +21,7 @@ const userSlice = createSlice({
     signInAction: (state, actions) => {
       const token = actions.payload;
       const user = decodeToken(token) as unknown as string;
+      toggleStorage(token);
       state.isLogedIn = true;
       state.error = "";
       state.status = "succeeded";

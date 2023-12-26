@@ -1,30 +1,42 @@
 import AuthSideImage from "../../assets/Auth-side-image.svg";
 import { Link, useNavigate } from "react-router-dom";
 import routes from "../../constants/routes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserType } from "../../types";
 import { signIn } from "../../api/atuh";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
 import { signInAction } from "../../features/UserSlice/userSlice";
 import { ClipLoader } from "react-spinners";
 const SignInForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      dispatch(signInAction(token));
+      navigate(routes.home);
+    }
+  }, [dispatch, navigate]);
+
   const [user, setUser] = useState<UserType>({
     email: "",
     password: "",
   });
   const [loader, setLoader] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+
   const handleOnChange = (fieldName: keyof UserType, value: string) => {
     setUser((prev) => ({
       ...prev,
       [fieldName]: value,
     }));
   };
-
+  const state = useSelector((state: RootState) => state.user);
+  console.log(state);
   const handleSignIn = (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault, setLoader(true);
+    e.preventDefault();
+    setLoader(true);
     signIn(user)
       .then((data) => {
         dispatch(signInAction(data.token));

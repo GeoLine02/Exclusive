@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import routes from "./constants/routes";
 import Home from "./Pages/Home/Home";
 import SignIn from "./Pages/SignIn/SignIn";
@@ -10,21 +10,23 @@ import store from "./store/store";
 import NavBar from "./components/NavBar/NavBar";
 import NotFound from "./Pages/NotFound/NotFound";
 import About from "./Pages/About/About";
+import RouteGuard from "./Guard/RouteGuard";
+
 function App() {
   return (
     <div>
       <Provider store={store}>
-        <Router>
-          <NavBar />
-          <Routes>
-            <Route path={routes.home} element={<Home />} />
-            <Route path={routes.signIn} element={<SignIn />} />
-            <Route path={routes.signUp} element={<SignUp />} />
+        <NavBar />
+        <Routes>
+          <Route element={<RouteGuard />}>
             <Route path={routes.cart} element={<Cart />} />
-            <Route path={routes.about} element={<About />} />
-            <Route path={routes.notFound} element={<NotFound />} />
-          </Routes>
-        </Router>
+            <Route path={routes.home} element={<Home />} />
+          </Route>
+          <Route path={routes.signIn} element={<SignIn />} />
+          <Route path={routes.signUp} element={<SignUp />} />
+          <Route path={routes.about} element={<About />} />
+          <Route path={routes.notFound} element={<NotFound />} />
+        </Routes>
       </Provider>
     </div>
   );

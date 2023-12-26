@@ -1,7 +1,39 @@
 import AuthSideImage from "../../assets/Auth-side-image.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import routes from "../../constants/routes";
+import { useState } from "react";
+import { UserType } from "../../types";
+import { signUp } from "../../api/atuh";
+import { ClipLoader } from "react-spinners";
 const SignUpForm = () => {
+  const [user, setUser] = useState<UserType>({
+    email: "",
+    userName: "",
+    password: "",
+  });
+  const [loader, setLoader] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const handleOnChange = (fieldName: keyof UserType, value: string) => {
+    setUser((prev) => ({
+      ...prev,
+      [fieldName]: value,
+    }));
+  };
+
+  const handleSignUp = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setLoader(true);
+    signUp(user)
+      .then(() => {
+        navigate(routes.signIn);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoader(false);
+      });
+  };
   return (
     <div className="flex justify-center items-center md:flex  md:gap-10">
       <img
@@ -17,6 +49,7 @@ const SignUpForm = () => {
         <div className="flex flex-col gap-5 mt-8">
           <div className="border-b-2 border-gray-400">
             <input
+              onChange={(e) => handleOnChange("userName", e.target.value)}
               className="outline-none bg-transparent "
               type="text"
               placeholder="Username"
@@ -24,6 +57,7 @@ const SignUpForm = () => {
           </div>
           <div className="border-b-2 border-gray-400">
             <input
+              onChange={(e) => handleOnChange("email", e.target.value)}
               className="outline-none bg-transparent "
               type="email"
               placeholder="Email"
@@ -31,6 +65,7 @@ const SignUpForm = () => {
           </div>
           <div className="border-b-2 border-gray-400 w-full">
             <input
+              onChange={(e) => handleOnChange("password", e.target.value)}
               className=" outline-none bg-transparent "
               type="passowrd"
               placeholder="Password"
@@ -38,7 +73,10 @@ const SignUpForm = () => {
           </div>
         </div>
         <div className=" w-full flex justify-center items-center mt-5 gap-6">
-          <button className="h-[56px] w-full bg-[#DB4444] rounded-md text-white">
+          <button
+            onClick={handleSignUp}
+            className="h-[56px] w-full bg-[#DB4444] rounded-md text-white"
+          >
             Create Account
           </button>
         </div>
@@ -49,6 +87,7 @@ const SignUpForm = () => {
           </Link>
         </p>
       </form>
+      {loader && <ClipLoader color="#DB4444" />}
     </div>
   );
 };
