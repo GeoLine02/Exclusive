@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import routes from "../../constants/routes";
 const SignUpForm = () => {
   return (
-    <div className="h-screen grid justify-center items-center md:flex  md:gap-10">
+    <div className="flex justify-center items-center md:flex  md:gap-10">
       <img
-        className="hidden md:block"
+        className="hidden md:block max-h-[600px]"
         src={AuthSideImage}
         alt="auth side image"
       />

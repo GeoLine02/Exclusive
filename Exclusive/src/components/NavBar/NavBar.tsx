@@ -3,7 +3,7 @@ import { AiOutlineSearch, AiOutlineBars } from "react-icons/ai";
 import routes from "../../constants/routes";
 const NavBar = () => {
   return (
-    <nav className="flex justify-between items-center">
+    <nav className="flex justify-between items-center px-20">
       <h1 className="text-4xl font-medium">Exclusive</h1>
       <ul className=" gap-5 hidden md:flex">
         <li>
