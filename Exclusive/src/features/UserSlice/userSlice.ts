@@ -27,8 +27,16 @@ const userSlice = createSlice({
       state.status = "succeeded";
       state.user = user;
     },
+
+    signOutAction: (state) => {
+      state.isLogedIn = false;
+      localStorage.removeItem("accessToken");
+      state.status = "idle";
+      state.error = "";
+      state.user = null;
+    },
   },
 });
 
-export const { signInAction } = userSlice.actions;
+export const { signInAction, signOutAction } = userSlice.actions;
 export default userSlice.reducer;

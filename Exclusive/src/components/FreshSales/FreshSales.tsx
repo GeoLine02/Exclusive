@@ -1,3 +1,5 @@
+import DiscountedItem from "./DiscountedItem";
+
 const FreshSales = () => {
   return (
     <section>
@@ -8,6 +10,9 @@ const FreshSales = () => {
       <div className="flex gap-3 items-center">
         <h1 className="text-4xl">Flash Sales</h1>
         <div>timer</div>
+        <div>
+          <DiscountedItem />
+        </div>
       </div>
     </section>
   );

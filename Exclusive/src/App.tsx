@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar/NavBar";
 import NotFound from "./Pages/NotFound/NotFound";
 import About from "./Pages/About/About";
 import RouteGuard from "./Guard/RouteGuard";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path={routes.about} element={<About />} />
           <Route path={routes.notFound} element={<NotFound />} />
         </Routes>
+        <Footer />
       </Provider>
     </div>
   );

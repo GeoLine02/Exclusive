@@ -51,7 +51,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="grid justify-center items-center md:flex  md:gap-10">
+    <div className="grid min-h-[80vh] justify-center items-center md:flex  md:gap-10">
       <img
         className="hidden md:block h-[600px]"
         src={AuthSideImage}
