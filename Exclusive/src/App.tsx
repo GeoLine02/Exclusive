@@ -12,6 +12,7 @@ import NotFound from "./Pages/NotFound/NotFound";
 import About from "./Pages/About/About";
 import RouteGuard from "./Guard/RouteGuard";
 import Footer from "./components/Footer/Footer";
+import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route element={<RouteGuard />}>
             <Route path={routes.cart} element={<Cart />} />
             <Route path={routes.home} element={<Home />} />
+            <Route path={`{${routes.home}/:id}`} element={<ProductDetails />} />
           </Route>
           <Route path={routes.signIn} element={<SignIn />} />
           <Route path={routes.signUp} element={<SignUp />} />

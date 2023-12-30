@@ -1,28 +1,48 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-
+import { ProductDetailsType, ProductsType } from "../../types";
 type initialStateType = {
   isProductsFetching: boolean;
   status: "idle" | "pending" | "succeeded" | "failed";
   products: null | PayloadAction;
-  sales: null | PayloadAction;
+  sales: null | SalesType;
   cart: null;
   error: string | unknown;
+  details: null | ProductDetailsType;
 };
 
 const initialState: initialStateType = {
   isProductsFetching: false,
   status: "idle",
   products: null,
+  details: null,
   sales: null,
   cart: null,
   error: "",
 };
 
-export const fetchSales = createAsyncThunk("produts/fetchSales", async () => {
-  const resp = await fetch("https://dummyjson.com/products?limit=12&skip=35");
-  const data = resp.json();
-  return data;
-});
+type SalesType = {
+  limit: number;
+  products: ProductsType[];
+  skip: number;
+  total: number;
+};
+
+// **********************
+//  Sales Fetching
+// **********************
+
+export const fetchSales = createAsyncThunk<SalesType>(
+  "produts/fetchSales",
+  async () => {
+    const resp = await fetch("https://dummyjson.com/products?limit=8&skip=20");
+    const data = resp.json();
+    return data;
+  }
+);
+
+// ***********************
+// Products Fetching
+// ***********************
 
 export const fetchProductsData = createAsyncThunk(
   "products/fetchProducts",
@@ -33,6 +53,19 @@ export const fetchProductsData = createAsyncThunk(
   }
 );
 
+// ************************
+//  Product Details Fetch
+// ************************
+
+export const fetchProductsDetails = createAsyncThunk<
+  ProductDetailsType,
+  string
+>("products/fetchProductsDetails", async (id) => {
+  const resp = await fetch(`https://dummyjson.com/products/${id}`);
+  const data = resp.json();
+  return data;
+});
+
 const productSlice = createSlice({
   name: "products",
   initialState,
@@ -41,8 +74,6 @@ const productSlice = createSlice({
     builder
       .addCase(fetchProductsData.pending, (state) => {
         state.isProductsFetching = true;
-        state.cart = null;
-        state.products = null;
         state.status = "pending";
         state.error = "";
       })
@@ -54,28 +85,39 @@ const productSlice = createSlice({
       })
       .addCase(fetchProductsData.rejected, (state, action) => {
         state.isProductsFetching = false;
-        state.cart = null;
-        state.products = null;
         state.status = "failed";
         state.error = action.payload;
       })
       .addCase(fetchSales.pending, (state) => {
         state.isProductsFetching = true;
         state.status = "pending";
-        state.error = "";
-        state.sales = null;
       })
       .addCase(fetchSales.fulfilled, (state, action) => {
+        const sales = action.payload;
         state.isProductsFetching = false;
-        state.error = "";
         state.status = "succeeded";
-        state.sales = action.payload;
+        state.sales = sales;
       })
       .addCase(fetchSales.rejected, (state, action) => {
         state.isProductsFetching = false;
         state.error = action.payload;
         state.sales = null;
         state.status = "failed";
+      })
+      .addCase(fetchProductsDetails.pending, (state) => {
+        state.isProductsFetching = true;
+        state.status = "pending";
+      })
+      .addCase(fetchProductsDetails.fulfilled, (state, action) => {
+        state.isProductsFetching = false;
+        state.status = "succeeded";
+        const details = action.payload;
+        state.details = details;
+      })
+      .addCase(fetchProductsDetails.rejected, (state, action) => {
+        state.isProductsFetching = false;
+        state.status = "failed";
+        state.error = action.payload;
       });
   },
 });

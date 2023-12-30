@@ -5,7 +5,7 @@ import Speakers from "../../assets/speakers.png";
 
 const NewArrival = () => {
   return (
-    <section className="box-border px-20">
+    <section className="mt-9">
       <div>
         <div className="flex gap-3 items-center">
           <span className="bg-[#DB4444] h-8 w-4 rounded-md "></span>
@@ -17,9 +17,9 @@ const NewArrival = () => {
         <img src={PlayStation} alt="PlayStation" />
         <div className="flex flex-col gap-3 items-center">
           <img src={WoomenColletions} alt="woomen's colletions" />
-          <div className="flex md:flex-row flex-col gap-3">
-            <img src={Speakers} alt="Speakers" />
-            <img src={Perfume} alt="Perfume" />
+          <div className="flex gap-1">
+            <img className="w-1/2 h-auto" src={Speakers} alt="Speakers" />
+            <img className="w-1/2" src={Perfume} alt="Perfume" />
           </div>
         </div>
       </div>

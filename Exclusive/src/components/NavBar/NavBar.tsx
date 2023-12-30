@@ -15,12 +15,12 @@ const NavBar = () => {
     setBurger(!burger);
   };
   return (
-    <nav className="flex justify-between items-center px-20">
+    <nav className="flex justify-between items-center ">
       <h1 className="text-4xl font-medium">Exclusive</h1>
       <ul
         className={
           burger
-            ? "absolute top-9 left-0 md:static md:flex md:gap-4 flex flex-col items-center justify-center w-full bg-white gap-3 py-3"
+            ? "absolute top-16 left-0 md:static md:flex md:gap-4 flex flex-col items-center justify-center w-full bg-white gap-3 py-3"
             : "absolute top-[-150px] left-0 md:static md:flex md:gap-4"
         }
       >
