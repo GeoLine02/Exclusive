@@ -23,7 +23,7 @@ function App() {
           <Route element={<RouteGuard />}>
             <Route path={routes.cart} element={<Cart />} />
             <Route path={routes.home} element={<Home />} />
-            <Route path={`{${routes.home}/:id}`} element={<ProductDetails />} />
+            <Route path={`${routes.home}/:id`} element={<ProductDetails />} />
           </Route>
           <Route path={routes.signIn} element={<SignIn />} />
           <Route path={routes.signUp} element={<SignUp />} />

@@ -22,7 +22,7 @@ const DiscountedItem = ({
     <div className="w-72 cursor-pointer">
       <div
         onClick={() => {
-          navigate(`${routes.home}/${id}`);
+          navigate(`${routes.home}${id}`);
         }}
         className="relative"
       >

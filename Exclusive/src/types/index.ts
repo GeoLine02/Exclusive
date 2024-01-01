@@ -15,5 +15,6 @@ export type ProductsType = {
 
 export type ProductDetailsType = ProductsType & {
   brand: string;
-  strock: number;
+  stock: number;
+  discription: string;
 };
