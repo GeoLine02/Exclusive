@@ -13,6 +13,7 @@ import About from "./Pages/About/About";
 import RouteGuard from "./Guard/RouteGuard";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import CheckOut from "./Pages/CheckOut/CheckOut";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path={`${routes.home}/:id`} element={<ProductDetails />} />
           </Route>
           <Route path={routes.signIn} element={<SignIn />} />
+          <Route path={routes.checkOut} element={<CheckOut />} />
           <Route path={routes.signUp} element={<SignUp />} />
           <Route path={routes.about} element={<About />} />
           <Route path={routes.notFound} element={<NotFound />} />

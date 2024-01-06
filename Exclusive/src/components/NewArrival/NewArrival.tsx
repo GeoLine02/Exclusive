@@ -17,9 +17,9 @@ const NewArrival = () => {
         <img src={PlayStation} alt="PlayStation" />
         <div className="flex flex-col gap-3 items-center">
           <img src={WoomenColletions} alt="woomen's colletions" />
-          <div className="flex gap-1">
-            <img className="w-1/2 h-auto" src={Speakers} alt="Speakers" />
-            <img className="w-1/2" src={Perfume} alt="Perfume" />
+          <div className="flex justify-center gap-2">
+            <img className="w-[45%] h-auto" src={Speakers} alt="Speakers" />
+            <img className="w-[45%]" src={Perfume} alt="Perfume" />
           </div>
         </div>
       </div>

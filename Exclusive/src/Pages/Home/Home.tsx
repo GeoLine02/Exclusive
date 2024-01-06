@@ -4,12 +4,12 @@ import Slider from "../../components/Slider/Slider";
 
 const Home = () => {
   return (
-    <div className="p-2">
+    <div>
       <div className="grid items-center justify-center">
         <Slider />
       </div>
       <NewArrival />
-      <div className="">
+      <div>
         <FreshSales />
       </div>
     </div>

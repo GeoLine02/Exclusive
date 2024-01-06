@@ -1,26 +1,27 @@
-import { NavLink } from "react-router-dom";
-import { AiOutlineSearch, AiOutlineBars, AiOutlineClose } from "react-icons/ai";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AiOutlineBars, AiOutlineClose } from "react-icons/ai";
 import routes from "../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { BsCart2 } from "react-icons/bs";
 import { signOutAction } from "../../features/UserSlice/userSlice";
 import { useState } from "react";
 const NavBar = () => {
   const isLogedIn = useSelector((state: RootState) => state.user.isLogedIn);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [burger, setBurger] = useState<boolean>(false);
 
   const handleBurger = () => {
     setBurger(!burger);
   };
   return (
-    <nav className="flex justify-between items-center ">
+    <nav className="flex justify-between items-center">
       <h1 className="text-4xl font-medium">Exclusive</h1>
       <ul
         className={
           burger
-            ? "absolute top-16 left-0 md:static md:flex md:gap-4 flex flex-col items-center justify-center w-full bg-white gap-3 py-3"
+            ? "absolute top-9 left-0 md:static md:flex md:gap-4 flex flex-col items-center justify-center w-full bg-white gap-3 py-3"
             : "absolute top-[-150px] left-0 md:static md:flex md:gap-4"
         }
       >
@@ -56,12 +57,13 @@ const NavBar = () => {
         )}
       </ul>
       <div className="flex items-center gap-">
-        <input
-          className="outline-none"
-          type="text"
-          placeholder="What are you looking for?"
+        <BsCart2
+          className="cursor-pointer"
+          onClick={() => {
+            navigate(routes.cart);
+          }}
+          size={25}
         />
-        <AiOutlineSearch className="cursor-pointer" size={30} />
         {burger ? (
           <AiOutlineClose
             onClick={handleBurger}

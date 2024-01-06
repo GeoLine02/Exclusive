@@ -5,7 +5,7 @@ type initialStateType = {
   status: "idle" | "pending" | "succeeded" | "failed";
   products: null | PayloadAction;
   sales: null | SalesType;
-  cart: null;
+  cart: null | ProductDetailsType[];
   error: string | unknown;
   details: null | ProductDetailsType;
 };
@@ -16,7 +16,7 @@ const initialState: initialStateType = {
   products: null,
   details: null,
   sales: null,
-  cart: null,
+  cart: [],
   error: "",
 };
 
@@ -69,7 +69,20 @@ export const fetchProductsDetails = createAsyncThunk<
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    addToCartAction: (state, action) => {
+      const item = state.cart?.some((item) => item.id === action.payload);
+      if (!item) {
+        state.cart?.push(action.payload);
+      }
+    },
+    removeCartItemAction: (state, action) => {
+      const item = state.cart?.filter((item) => item.id !== action.payload);
+      if (item) {
+        state.cart = item;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsData.pending, (state) => {
@@ -122,4 +135,5 @@ const productSlice = createSlice({
   },
 });
 
+export const { addToCartAction, removeCartItemAction } = productSlice.actions;
 export default productSlice.reducer;

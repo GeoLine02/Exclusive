@@ -41,7 +41,7 @@ const Timer = ({ expirationDate }: TimerProps) => {
     return () => clearInterval(timer);
   }, [expirationDate, calculateTimeLeft]);
   return (
-    <div className="flex items-end gap-2 p-2 bg-[#DB4444] text-white rounded-md">
+    <div className="flex w-fit items-end gap-2 p-2 bg-[#DB4444] text-white rounded-md">
       <div>
         <span className="text-xs font-medium">Days</span>
         <div className="flex items-center gap-2">

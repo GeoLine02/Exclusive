@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <nav>
       {isLogedIn ? (
-        <div className="grid grid-cols-3 justify-center gap-4 p-5 text-white bg-black ">
+        <div className="grid grid-cols-2 justify-center gap-4 p-5 text-white bg-black ">
           <ul className="grid justify-center items-center">
             <h3 className="text-3xl font-medium">Exclusive</h3>
             <li className="text-sm">Subscribe</li>

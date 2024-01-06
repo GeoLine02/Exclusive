@@ -76,7 +76,7 @@ const SignInForm = () => {
             <input
               onChange={(e) => handleOnChange("password", e.target.value)}
               className=" outline-none bg-transparent border-b-2 border-gray-400"
-              type="passowrd"
+              type="password"
               placeholder="Password"
               name="password"
             />
