@@ -18,3 +18,10 @@ export type ProductDetailsType = ProductsType & {
   stock: number;
   description: string;
 };
+
+export type TimeLeftType = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};

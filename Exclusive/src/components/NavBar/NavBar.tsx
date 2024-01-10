@@ -17,7 +17,14 @@ const NavBar = () => {
   };
   return (
     <nav className="flex justify-between items-center">
-      <h1 className="text-4xl font-medium">Exclusive</h1>
+      <h1
+        onClick={() => {
+          navigate(routes.home);
+        }}
+        className="text-4xl font-medium cursor-pointer"
+      >
+        Exclusive
+      </h1>
       <ul
         className={
           burger
@@ -32,7 +39,7 @@ const NavBar = () => {
           <NavLink to={routes.contact}>Contact</NavLink>
         </li>
         <li>
-          <NavLink to={routes.about}>About</NavLink>
+          <NavLink to={routes.about}>About Us</NavLink>
         </li>
         {!isLogedIn ? (
           <div className="flex gap-4">

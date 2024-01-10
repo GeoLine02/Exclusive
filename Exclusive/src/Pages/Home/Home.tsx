@@ -1,3 +1,4 @@
+import BestSellings from "../../components/BestSellings/BestSellings";
 import FreshSales from "../../components/FreshSales/FreshSales";
 import NewArrival from "../../components/NewArrival/NewArrival";
 import Slider from "../../components/Slider/Slider";
@@ -8,9 +9,14 @@ const Home = () => {
       <div className="grid items-center justify-center">
         <Slider />
       </div>
-      <NewArrival />
       <div>
         <FreshSales />
+      </div>
+      <div>
+        <BestSellings />
+      </div>
+      <div>
+        <NewArrival />
       </div>
     </div>
   );

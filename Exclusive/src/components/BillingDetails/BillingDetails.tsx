@@ -1,4 +1,40 @@
+import { ChangeEvent, MouseEvent, useState } from "react";
+
+type BillingDetailsType = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  townOrCity: string;
+  phone: string;
+};
+
 const BillingDetails = () => {
+  const [saveDetails, setSaveDetails] = useState<boolean>(false);
+  const [billingDetails, setBillingDetails] = useState<BillingDetailsType>({
+    firstName: "",
+    lastName: "",
+    address: "",
+    townOrCity: "",
+    phone: "",
+  });
+
+  console.log(billingDetails);
+
+  const handlePlaceOrder = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (saveDetails) {
+      localStorage.setItem("billingDetails", JSON.stringify(billingDetails));
+    }
+  };
+
+  const detailsOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setBillingDetails((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="lg:flex justify-between">
       <div>
@@ -8,13 +44,15 @@ const BillingDetails = () => {
         </p>
         <div className="w-fit">
           <h1 className="text-3xl font-medium">Billing Details</h1>
-          <div className="w-full">
+          <form className="w-full">
             <div>
               <label htmlFor="firstName">First Name</label> <br />
               <input
                 className="bg-gray-100 w-full h-11"
                 type="text"
                 name="firstName"
+                onChange={detailsOnChange}
+                required
               />
             </div>
             <div>
@@ -24,6 +62,8 @@ const BillingDetails = () => {
                 className="bg-gray-100 w-full h-11"
                 type="text"
                 name="lastName"
+                onChange={detailsOnChange}
+                required
               />
             </div>
             <div>
@@ -32,6 +72,8 @@ const BillingDetails = () => {
                 className="bg-gray-100 w-full h-11"
                 type="text"
                 name="address"
+                onChange={detailsOnChange}
+                required
               />
             </div>
             <div>
@@ -39,7 +81,9 @@ const BillingDetails = () => {
               <input
                 className="bg-gray-100 w-full h-11"
                 type="text"
-                name="town/city"
+                name="townOrCity"
+                onChange={detailsOnChange}
+                required
               />
             </div>
             <div>
@@ -47,14 +91,27 @@ const BillingDetails = () => {
               <input
                 className="bg-gray-100 w-full h-11"
                 type="text"
-                name="phoneNumber"
+                name="phone"
+                onChange={detailsOnChange}
+                required
               />
             </div>
             <div className="mt-3">
-              <input type="checkbox" />
+              <input
+                onClick={() => {
+                  setSaveDetails(!saveDetails);
+                }}
+                type="checkbox"
+              />
               <span>Save this information for faster check-out next time</span>
             </div>
-          </div>
+            <button
+              onClick={handlePlaceOrder}
+              className="text-white bg-[#DB4444] px-5 py-3 rounded-sm"
+            >
+              Place Order
+            </button>
+          </form>
         </div>
       </div>
     </div>

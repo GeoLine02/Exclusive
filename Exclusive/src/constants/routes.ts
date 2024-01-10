@@ -6,6 +6,7 @@ const checkOut = "/checkOut";
 const contact = "/contact";
 const forgetPassword = "/forgetPassword";
 const about = "/about";
+const allProducts = "/allProducts";
 const notFound = "*";
 
 const routes = {
@@ -18,6 +19,7 @@ const routes = {
   contact,
   about,
   notFound,
+  allProducts,
 };
 
 export default routes;

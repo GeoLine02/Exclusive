@@ -1,10 +1,11 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ProductDetailsType, ProductsType } from "../../types";
 type initialStateType = {
   isProductsFetching: boolean;
   status: "idle" | "pending" | "succeeded" | "failed";
-  products: null | PayloadAction;
+  products: null | SalesType;
   sales: null | SalesType;
+  bestSellings: null | SalesType;
   cart: null | ProductDetailsType[];
   error: string | unknown;
   details: null | ProductDetailsType;
@@ -14,6 +15,7 @@ const initialState: initialStateType = {
   isProductsFetching: false,
   status: "idle",
   products: null,
+  bestSellings: null,
   details: null,
   sales: null,
   cart: [],
@@ -40,14 +42,29 @@ export const fetchSales = createAsyncThunk<SalesType>(
   }
 );
 
+// **********************
+// BestSellings Fetching
+// **********************
+
+export const fetchBestSellings = createAsyncThunk<SalesType>(
+  "products/fetchBestSellings",
+  async () => {
+    const resp = await fetch("https://dummyjson.com/products?limit=4");
+    const data = resp.json();
+    return data;
+  }
+);
+
 // ***********************
 // Products Fetching
 // ***********************
 
-export const fetchProductsData = createAsyncThunk(
+export const fetchProductsData = createAsyncThunk<SalesType, number>(
   "products/fetchProducts",
-  async () => {
-    const resp = await fetch("https://dummyjson.com/products");
+  async (page) => {
+    const resp = await fetch(
+      `https://dummyjson.com/products?limit=10&skip=${10 * page}`
+    );
     const data = resp.json();
     return data;
   }
@@ -130,6 +147,22 @@ const productSlice = createSlice({
       .addCase(fetchProductsDetails.rejected, (state, action) => {
         state.isProductsFetching = false;
         state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(fetchBestSellings.pending, (state) => {
+        state.isProductsFetching = true;
+        state.status = "pending";
+        state.bestSellings = null;
+      })
+      .addCase(fetchBestSellings.fulfilled, (state, action) => {
+        state.isProductsFetching = false;
+        state.status = "succeeded";
+        state.bestSellings = action.payload;
+      })
+      .addCase(fetchBestSellings.rejected, (state, action) => {
+        state.isProductsFetching = false;
+        state.status = "failed";
+        state.bestSellings = null;
         state.error = action.payload;
       });
   },

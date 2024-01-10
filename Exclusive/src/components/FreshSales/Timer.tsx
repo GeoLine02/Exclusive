@@ -1,14 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-
+import { TimeLeftType } from "../../types/index";
 type TimerProps = {
   expirationDate: Date;
-};
-
-type TimeLeftType = {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
 };
 
 const Timer = ({ expirationDate }: TimerProps) => {

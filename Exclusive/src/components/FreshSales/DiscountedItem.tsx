@@ -5,7 +5,7 @@ type DiscountedItemProps = {
   title: string;
   images: string[];
   price: number;
-  discountPercentage: number;
+  discountPercentage?: number;
   id: number;
 };
 
@@ -19,17 +19,23 @@ const DiscountedItem = ({
   const navigate = useNavigate();
 
   return (
-    <div className="w-72 cursor-pointer">
+    <div className=" cursor-pointer">
       <div
         onClick={() => {
           navigate(`${routes.home}${id}`);
         }}
         className="relative"
       >
-        <img src={images[0]} alt={title} />
-        <span className="text-white font-medium text-xs bg-[#DB4444] p-1 rounded-md absolute top-3 left-3">
-          -{discountPercentage}%
-        </span>
+        <img
+          className="min-h-40 min-w-40 max-h-52 max-w-52"
+          src={images[0]}
+          alt={title}
+        />
+        {discountPercentage ? (
+          <span className="text-white font-medium text-xs bg-[#DB4444] p-1 rounded-md absolute top-3 left-3">
+            -{discountPercentage}%
+          </span>
+        ) : null}
       </div>
       <div>
         <h3 className="font-medium">{title}</h3>
