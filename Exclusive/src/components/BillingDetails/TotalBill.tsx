@@ -1,10 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import routes from "../../constants/routes";
 import { useLocation } from "react-router-dom";
-import Bkash from "../../assets/Bkash.svg";
-import Visa from "../../assets/Visa.svg";
-import MasterCard from "../../assets/masterCard.svg";
-import Nagad from "../../assets/nagad.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
@@ -45,39 +41,16 @@ const TotalBill = ({ border, color, radius }: TotalBillProps) => {
         </div>
       </div>
       <div className="w-full grid place-content-center mt-6">
-        {location.pathname === "/checkOut" ? (
-          <div>
-            <div className="flex gap-10">
-              <div>
-                <input type="radio" />
-                <label className="ml-1" htmlFor="radio">
-                  Bank
-                </label>
-              </div>
-              <div className="flex gap-1 items-center">
-                <img src={Bkash} alt="Bkash" />
-                <img src={Visa} alt="Visa" />
-                <img src={MasterCard} alt="MasterCard" />
-                <img src={Nagad} alt="Nagad" />
-              </div>
-            </div>
-            <div>
-              <input type="radio" />
-              <label className="ml-1" htmlFor="radio">
-                Cash on Delivery
-              </label>
-            </div>
-          </div>
-        ) : (
+        {location.pathname === "/cart" ? (
           <button
             onClick={() => {
-              navigate(routes.checkOut);
+              cart?.length !== 0 ? navigate(routes.checkOut) : null;
             }}
             className="bg-[#DB4444] text-white px-6 py-2 rounded-sm"
           >
             Process to checkout
           </button>
-        )}
+        ) : null}
       </div>
     </div>
   );
