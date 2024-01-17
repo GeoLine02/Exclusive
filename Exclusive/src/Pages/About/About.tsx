@@ -5,7 +5,7 @@ import founders from "../../constants/founders";
 import services from "../../constants/services";
 const About = () => {
   return (
-    <div>
+    <div className="px-6 py-4">
       <p className="my-5 font-medium">
         <span className="text-gray-500">Home / </span> About
       </p>

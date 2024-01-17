@@ -29,7 +29,7 @@ const ProductsDetailsComponent = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className="px-6 py-4">
       <p className="text-gray-300">
         Account / {details?.category} /
         <span className="text-black">{details?.title}</span>

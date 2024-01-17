@@ -5,7 +5,7 @@ import Speakers from "../../assets/speakers.png";
 
 const NewArrival = () => {
   return (
-    <section className="mt-9">
+    <section className="mt-9 px-6 py-4">
       <div>
         <div className="flex gap-3 items-center">
           <span className="bg-[#DB4444] h-8 w-4 rounded-md "></span>

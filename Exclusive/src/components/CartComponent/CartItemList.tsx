@@ -6,9 +6,9 @@ const CartItemList = () => {
   const cartItems = useSelector((state: RootState) => state.produts.cart);
 
   return (
-    <div className="">
+    <div className="px-6 py-4">
       <div className="lg:flex justify-between">
-        <div className="  md:gap-3 md:max-w-[80vh] md:justify-center">
+        <div className="md:gap-3 md:max-w-[80vh] md:justify-center whitespace-nowrap overflow-y-auto h-56 ">
           {cartItems?.map((item) => (
             <CartItem
               key={item.id}

@@ -16,7 +16,7 @@ const BestSellings = () => {
     dispatch(fetchBestSellings());
   }, [dispatch]);
   return (
-    <div>
+    <div className="py-4 px-6">
       <div className="flex items-center gap-2">
         <span className="bg-[#DB4444] h-8 w-4 rounded-md"></span>
         <span className="text-[#DB4444] font-bold">This month</span>
@@ -32,7 +32,7 @@ const BestSellings = () => {
           View All
         </button>
       </div>
-      <div className="mt-6 flex gap-4 whitespace-nowrap overflow-x-auto md:justify-center">
+      <div className="mt-6 flex gap-4 whitespace-nowrap overflow-x-auto md:grid md:grid-cols-4">
         {bestSellings?.products.map((item) => (
           <DiscountedItem
             id={item.id}

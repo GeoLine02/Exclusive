@@ -17,7 +17,7 @@ const FreshSales = () => {
   expirationDate.setDate(expirationDate.getDate() + 3);
 
   return (
-    <section>
+    <section className="px-6 py-4">
       <div className="flex gap-2">
         <span className="h-8 w-4 bg-[#DB4444] rounded-md"></span>
         <p className="text-[#DB4444] font-bold">Today's</p>
