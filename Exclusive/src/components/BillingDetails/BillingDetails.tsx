@@ -32,7 +32,8 @@ const BillingDetails = () => {
   };
 
   console.log(userBillingDetails);
-  const onSubmit = (values) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = (values: any) => {
     setSubmit(true);
     if (saveDetails) {
       localStorage.setItem("billingDetails", JSON.stringify(values));
