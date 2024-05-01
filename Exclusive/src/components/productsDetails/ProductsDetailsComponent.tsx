@@ -16,8 +16,6 @@ const ProductsDetailsComponent = () => {
   const details = useSelector((state: RootState) => state.produts.details);
   const [selectImage, setSelectImage] = useState<number>(0);
   const [cart, setCart] = useState<boolean>(false);
-  const state = useSelector((state: RootState) => state.produts);
-  console.log(state);
 
   const addToCart = () => {
     setCart(true);

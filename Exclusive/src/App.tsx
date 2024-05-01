@@ -15,10 +15,10 @@ import Footer from "./components/Footer/Footer";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import CheckOut from "./Pages/CheckOut/CheckOut";
 import AllProducts from "./Pages/AllProducts/AllProducts";
-
+import "./App.css"
 function App() {
   return (
-    <div>
+    <div className="App">
       <Provider store={store}>
         <NavBar />
         <Routes>
