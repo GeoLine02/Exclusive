@@ -17,7 +17,7 @@ const FreshSales = () => {
   expirationDate.setDate(expirationDate.getDate() + 3);
 
   return (
-    <section className="px-6 py-4">
+    <section className="px-6 py-4 max-w-screen-xl w-full mx-auto">
       <div className="flex gap-2">
         <span className="h-8 w-4 bg-[#DB4444] rounded-md"></span>
         <p className="text-[#DB4444] font-bold">Today's</p>
@@ -28,7 +28,7 @@ const FreshSales = () => {
           <Timer expirationDate={expirationDate} />
         </div>
       </div>
-      <div className="flex whitespace-nowrap gap-3 overflow-x-auto md:grid md:grid-cols-4 mt-5 ">
+      <div className="flex whitespace-nowrap gap-4 overflow-x-auto md:grid md:grid-cols-4 mt-5 ">
         {sales?.products?.map((state) => (
           <DiscountedItem
             id={state.id}

@@ -19,7 +19,7 @@ const DiscountedItem = ({
   const navigate = useNavigate();
 
   return (
-    <div className=" cursor-pointer">
+    <div className="flex flex-col justify-between cursor-pointer max-w-52 pb-6">
       <div
         onClick={() => {
           navigate(`${routes.home}${id}`);
@@ -38,7 +38,7 @@ const DiscountedItem = ({
         ) : null}
       </div>
       <div>
-        <h3 className="font-medium">{title}</h3>
+        <h3 className="font-medium overflow-x-hidden">{title}</h3>
         <div>
           <p className="text-red-600 font-medium">price: {price}$</p>
         </div>
