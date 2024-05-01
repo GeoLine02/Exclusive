@@ -31,7 +31,6 @@ const BillingDetails = () => {
     setSubmit(false);
   };
 
-  console.log(userBillingDetails);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (values: any) => {
     setSubmit(true);
