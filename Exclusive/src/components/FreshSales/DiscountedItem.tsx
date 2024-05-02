@@ -18,6 +18,8 @@ const DiscountedItem = ({
 }: DiscountedItemProps) => {
   const navigate = useNavigate();
 
+  const roundedDiscountPercentage = Math.round(discountPercentage as number);
+
   return (
     <div className="flex flex-col justify-between cursor-pointer max-w-52 pb-6">
       <div
@@ -33,7 +35,7 @@ const DiscountedItem = ({
         />
         {discountPercentage ? (
           <span className="text-white font-medium text-xs bg-[#DB4444] p-1 rounded-md absolute top-3 left-3">
-            -{discountPercentage}%
+            -{roundedDiscountPercentage}%
           </span>
         ) : null}
       </div>
