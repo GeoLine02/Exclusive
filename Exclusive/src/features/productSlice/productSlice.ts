@@ -49,7 +49,7 @@ export const fetchSales = createAsyncThunk<SalesType>(
 export const fetchBestSellings = createAsyncThunk<SalesType>(
   "products/fetchBestSellings",
   async () => {
-    const resp = await fetch("https://dummyjson.com/products?limit=4");
+    const resp = await fetch("https://dummyjson.com/products?limit=8");
     const data = resp.json();
     return data;
   }
