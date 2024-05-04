@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import {
-  addToCartAction,
-  fetchProductsDetails,
-} from "../../features/productSlice/productSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaTruckFast } from "react-icons/fa6";
 import { RiLoopLeftFill } from "react-icons/ri";
+import { ProductDetailsType } from "../../types";
+import Button from "../ui/Button";
 
-const ProductsDetailsComponent = () => {
-  const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch<AppDispatch>();
-  const details = useSelector((state: RootState) => state.produts.details);
-  const [selectImage, setSelectImage] = useState<number>(0);
-  const [cart, setCart] = useState<boolean>(false);
+interface ProductsDetailsPropsType {
+  cart: boolean;
+  setCart: React.Dispatch<React.SetStateAction<boolean>>;
+  removeFromCart: () => void;
+  addToCart: () => void;
+  id: string | undefined;
+  details: ProductDetailsType | null;
+  selectImage: number;
+  setSelectImage: React.Dispatch<React.SetStateAction<number>>;
+  onBuy: () => void;
+}
 
-  const addToCart = () => {
-    setCart(true);
-    dispatch(addToCartAction(details));
-  };
-
-  useEffect(() => {
-    dispatch(fetchProductsDetails(id as string));
-  }, [dispatch, id]);
-
+const ProductsDetailsComponent = ({
+  addToCart,
+  cart,
+  details,
+  selectImage,
+  setSelectImage,
+  onBuy,
+  removeFromCart,
+}: ProductsDetailsPropsType) => {
   return (
     <div className="px-6 py-4">
       <p className="text-gray-300">
@@ -60,21 +59,39 @@ const ProductsDetailsComponent = () => {
             <h2>Price: {details?.price}$</h2>
             <p className="max-w-96">Description: {details?.description}</p>
           </div>
-          <div className="flex gap-6 mt-8 justify-center">
-            <button className="py-2 px-5 bg-[#DB4444] text-white rounded-sm">
-              Buy Now
-            </button>
-            <button className="w-10 border-[#DB4444] border-2 rounded-sm flex items-center justify-center">
+          <div className="flex gap-6 mt-8 justify-center items-center">
+            <div className="max-w-80">
+              <Button
+                align="default"
+                onClick={onBuy}
+                textColor="light"
+                type="button"
+                background="red"
+              >
+                Buy Now
+              </Button>
+            </div>
+            <div className="max-w-72">
               {cart ? (
-                <AiFillHeart size={25} color={"#DB4444"} />
+                <Button
+                  align="default"
+                  onClick={removeFromCart}
+                  textColor="light"
+                  type="button"
+                  bordered
+                  icon={<AiFillHeart size={25} color={"#DB4444"} />}
+                />
               ) : (
-                <AiOutlineHeart
+                <Button
+                  align="default"
                   onClick={addToCart}
-                  color={"#DB4444"}
-                  size={25}
+                  textColor="dark"
+                  type="button"
+                  bordered
+                  icon={<AiOutlineHeart size={25} color="#DB4444" />}
                 />
               )}
-            </button>
+            </div>
           </div>
           <div>
             <div className="flex items-center gap-4 my-4 border-gray-300 border-2 rounded-md p-4">
