@@ -1,66 +1,45 @@
 import { useEffect, useState } from "react";
-import { useFormik } from "formik";
-import { billingSchema } from "../../schemas/billingSchema";
 import Button from "../ui/Button";
 import PaymentSuccessMessage from "../PaymentSuccessMessage/PaymentSuccessMessage";
-
-type BillingDetailsType = {
-  firstName: string;
-  lastName: string;
-  address: string;
-  phone: string;
-  townOrCity: string;
-};
+import BillingForm from "./BillingForm";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { clearCartAction } from "../../features/productSlice/productSlice";
+import { BillingDetailsType } from "../../types/billing";
 
 const BillingDetails = () => {
   const [saveDetails, setSaveDetails] = useState<boolean>(false);
   const [submit, setSubmit] = useState<boolean>(false);
   const [userBillingDetails, setUserBillingDetails] =
     useState<BillingDetailsType | null>(null);
-
+  const [formType, setFormType] = useState<"new" | "edit">("new");
+  const dispatch = useDispatch<AppDispatch>();
+  const billingDetails = localStorage.getItem("billingDetails");
   useEffect(() => {
-    const billingDetails = localStorage.getItem("billingDetails");
-
     if (billingDetails) {
       const parsedDetails = JSON.parse(billingDetails);
       setUserBillingDetails(parsedDetails);
     }
-  }, []);
+  }, [billingDetails]);
 
   const onOrderPlace = () => {
     setSubmit(true);
+    dispatch(clearCartAction());
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (values: any) => {
     setSubmit(true);
+    dispatch(clearCartAction());
+    localStorage.removeItem("cart");
     if (saveDetails) {
       localStorage.setItem("billingDetails", JSON.stringify(values));
     }
-    resetForm();
   };
-  const {
-    handleBlur,
-    handleChange,
-    resetForm,
-    isSubmitting,
-    handleSubmit,
-    values,
-    errors,
-    touched,
-  } = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      address: "",
-      townOrCity: "",
-      phone: "",
-    },
-    validationSchema: billingSchema,
-    onSubmit,
-  });
 
-  const onEdit = () => {};
+  const onEdit = () => {
+    setFormType("edit");
+  };
 
   if (submit) {
     return <PaymentSuccessMessage />;
@@ -74,16 +53,16 @@ const BillingDetails = () => {
           </p>
           <div className="w-fit">
             <h1 className="text-3xl font-medium">Billing Details</h1>
-            {userBillingDetails ? (
+            {userBillingDetails && formType === "new" && (
               <div>
                 <div className="rounded-md shadow-gray-400 shadow-md p-2 bg-gray-100 my-4 max-w-72">
-                  <p>Frist name: {userBillingDetails.firstName}</p>
+                  <p>First name: {userBillingDetails.firstName}</p>
                   <p>Last name: {userBillingDetails.lastName}</p>
                   <p>Town/City: {userBillingDetails.townOrCity}</p>
                   <p>Address: {userBillingDetails.address}</p>
-                  <p>Phone: {userBillingDetails.phone}</p>
+                  <p>Phone: {userBillingDetails.phoneNumber}</p>
                 </div>
-                <div className="flex flex-col gap-4">
+                <div className="flex gap-6">
                   <div className="max-w-36">
                     <Button
                       align="default"
@@ -108,123 +87,22 @@ const BillingDetails = () => {
                   </div>
                 </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="w-full">
-                <div>
-                  <label htmlFor="firstName">First Name</label> <br />
-                  <input
-                    value={values.firstName}
-                    className={
-                      errors.firstName
-                        ? "border-2 border-red-600 w-full h-11"
-                        : "bg-gray-100 w-full h-11"
-                    }
-                    type="text"
-                    name="firstName"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                  />
-                  <div className="error">
-                    {errors.firstName && touched.firstName && errors.firstName}
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="lastName">Last Name</label>
-                  <br />
-                  <input
-                    value={values.lastName}
-                    className={
-                      errors.lastName
-                        ? "border-2 border-red-600 w-full h-11"
-                        : "bg-gray-100 w-full h-11"
-                    }
-                    type="text"
-                    name="lastName"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                  />
-                  <div>
-                    {errors.lastName && touched.lastName && errors.lastName}
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="address">Address</label> <br />
-                  <input
-                    value={values.address}
-                    className={
-                      errors.address
-                        ? "border-2 border-red-600 w-full h-11"
-                        : "bg-gray-100 w-full h-11"
-                    }
-                    type="text"
-                    name="address"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                  />
-                  <div>
-                    {errors.address && touched.address && errors.address}
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="townOrCity">Town/City</label> <br />
-                  <input
-                    value={values.townOrCity}
-                    className={
-                      errors.townOrCity
-                        ? "border-2 border-red-600 w-full h-11"
-                        : "bg-gray-100 w-full h-11"
-                    }
-                    type="text"
-                    name="townOrCity"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                  />
-                  <div>
-                    {errors.townOrCity &&
-                      touched.townOrCity &&
-                      errors.townOrCity}
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="phoneNumber">Phone Number</label> <br />
-                  <input
-                    value={values.phone}
-                    className={
-                      errors.phone
-                        ? "border-2 border-red-600 w-full h-11"
-                        : "bg-gray-100 w-full h-11"
-                    }
-                    type="numeric"
-                    name="phone"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                  />
-                  <div>{errors.phone && touched.phone && errors.phone}</div>
-                </div>
-                <div className="mt-3">
-                  <input
-                    onClick={() => {
-                      setSaveDetails(!saveDetails);
-                    }}
-                    type="checkbox"
-                  />
-                  <span>
-                    Save this information for faster check-out next time
-                  </span>
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="text-white bg-[#DB4444] px-5 py-3 rounded-sm"
-                >
-                  Place Order
-                </button>
-              </form>
+            )}
+            {!userBillingDetails && formType === "new" && (
+              <BillingForm
+                type={formType}
+                saveDetails={saveDetails}
+                setSaveDetails={setSaveDetails}
+                onSubmit={onSubmit}
+              />
+            )}
+            {billingDetails && formType === "edit" && (
+              <BillingForm
+                type={formType}
+                saveDetails={saveDetails}
+                setSaveDetails={setSaveDetails}
+                onSubmit={onSubmit}
+              />
             )}
           </div>
         </div>

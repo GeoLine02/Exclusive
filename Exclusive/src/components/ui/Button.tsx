@@ -9,7 +9,7 @@ interface ButtonPropsType {
   textColor: "light" | "dark";
   type: "submit" | "reset" | "button" | undefined;
   className?: string;
-  onClick: MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 const Button = ({
