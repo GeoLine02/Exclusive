@@ -28,8 +28,8 @@ const NavBar = () => {
       <ul
         className={
           burger
-            ? "absolute top-9 left-0 md:static md:flex md:gap-4 flex flex-col items-center justify-center w-full bg-white gap-3 py-3"
-            : "absolute top-[-150px] left-0 md:static md:flex md:gap-4"
+            ? "absolute top-11 left-0 md:static md:flex md:gap-4 flex flex-col items-center justify-center w-full bg-white gap-3 py-3 z-50"
+            : "absolute top-[-150px] left-0 md:static md:flex md:gap-4 z-50"
         }
       >
         <li>
