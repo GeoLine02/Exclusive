@@ -22,7 +22,7 @@ const About = () => {
             in categories ranging from consumer.
           </p>
         </div>
-        <img src={AboutSideImage} alt="About side image" />
+        <img loading="lazy" src={AboutSideImage} alt="About side image" />
       </div>
       <div className="overflow-x-auto whitespace-nowrap lg:flex gap-4  mt-8 lg:justify-center overflow-y-hidden h-72 ">
         {services.map((service) => (

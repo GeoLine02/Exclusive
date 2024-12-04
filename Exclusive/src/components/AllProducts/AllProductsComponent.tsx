@@ -7,14 +7,25 @@ import AllProductList from "../blocks/allProductList/AllProductList";
 const AllProductsComponent = () => {
   const [page, setPage] = useState<number>(0);
   const pages = [0, 1, 2, 3];
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(fetchProductsData(page));
+    const fetchAllProducts = async () => {
+      setIsLoading(true);
+      try {
+        await dispatch(fetchProductsData(page));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchAllProducts();
   }, [dispatch, page]);
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-screen-xl mx-auto ">
       <div>
-        <AllProductList />
+        <AllProductList isLoading={isLoading} />
       </div>
       <div className="flex justify-center gap-2 items-center">
         {pages.map((page, index) => (

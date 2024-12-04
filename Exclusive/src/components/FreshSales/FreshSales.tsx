@@ -28,7 +28,7 @@ const FreshSales = () => {
           <Timer expirationDate={expirationDate} />
         </div>
       </div>
-      <div className="flex whitespace-nowrap gap-4 overflow-x-auto md:grid md:grid-cols-4 mt-5 ">
+      <div className="flex whitespace-nowrap gap-4 overflow-x-auto md:grid md:grid-cols-4 mt-5 mb-4">
         {sales?.products?.map((state) => (
           <DiscountedItem
             id={state.id}

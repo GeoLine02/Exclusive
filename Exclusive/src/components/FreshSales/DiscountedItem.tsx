@@ -21,7 +21,7 @@ const DiscountedItem = ({
   const roundedDiscountPercentage = Math.round(discountPercentage as number);
 
   return (
-    <div className="flex flex-col justify-between cursor-pointer max-w-52 pb-6">
+    <div className="flex flex-col justify-between cursor-pointer max-w-52 pb-6 rounded-lg border border-gray-200 shadow-xl p-3 mb-4">
       <div
         onClick={() => {
           navigate(`${routes.home}${id}`);
@@ -29,13 +29,14 @@ const DiscountedItem = ({
         className="relative"
       >
         <img
+          loading="lazy"
           className="min-h-40 min-w-40 max-h-52 max-w-52"
           src={images[0]}
           alt={title}
         />
         {discountPercentage ? (
-          <span className="text-white font-medium text-xs bg-[#DB4444] p-1 rounded-md absolute top-3 left-3">
-            -{roundedDiscountPercentage}%
+          <span className="text-white font-medium text-xs bg-[#DB4444] p-1 rounded-md absolute top-3 left-3 px-3">
+            discount: -{roundedDiscountPercentage}%
           </span>
         ) : null}
       </div>

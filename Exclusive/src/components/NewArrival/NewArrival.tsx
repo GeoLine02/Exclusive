@@ -14,12 +14,26 @@ const NewArrival = () => {
         <h1 className="text-3xl">New Arrival</h1>
       </div>
       <div className="flex flex-col lg:flex-row gap-3 items-center justify-center my-5">
-        <img src={PlayStation} alt="PlayStation" />
+        <img loading="lazy" src={PlayStation} alt="PlayStation" />
         <div className="flex flex-col gap-3 items-center">
-          <img src={WoomenColletions} alt="woomen's colletions" />
+          <img
+            loading="lazy"
+            src={WoomenColletions}
+            alt="woomen's colletions"
+          />
           <div className="flex justify-center gap-2">
-            <img className="w-[45%] h-auto" src={Speakers} alt="Speakers" />
-            <img className="w-[45%]" src={Perfume} alt="Perfume" />
+            <img
+              loading="lazy"
+              className="w-[45%] h-auto"
+              src={Speakers}
+              alt="Speakers"
+            />
+            <img
+              loading="lazy"
+              className="w-[45%]"
+              src={Perfume}
+              alt="Perfume"
+            />
           </div>
         </div>
       </div>

@@ -40,14 +40,20 @@ const Footer = () => {
             <li className="2xl font-medium">Download App</li>
             <span>Save $3 with App New Users Only</span>
             <div className="flex items-center gap-2">
-              <img src={QRCode} alt="Qr code" />
+              <img loading="lazy" src={QRCode} alt="Qr code" />
               <div>
                 <img
+                  loading="lazy"
                   className="pb-2 cursor-pointer"
                   src={GooglePlay}
                   alt="google play"
                 />
-                <img className="cursor-pointer" src={AppStore} alt="appStore" />
+                <img
+                  loading="lazy"
+                  className="cursor-pointer"
+                  src={AppStore}
+                  alt="appStore"
+                />
               </div>
             </div>
           </ul>

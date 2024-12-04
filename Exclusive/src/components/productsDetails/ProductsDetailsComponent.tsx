@@ -35,6 +35,7 @@ const ProductsDetailsComponent = ({
         <div className="grid grid-row-2 md:flex gap-4 md:items-center md:flex-row-reverse">
           <div>
             <img
+              loading="lazy"
               className="max-w-72 mx-auto md:max-w-96"
               src={details?.images[selectImage]}
             />
@@ -42,6 +43,7 @@ const ProductsDetailsComponent = ({
           <div className="flex gap-2 whitespace-nowrap overflow-x-auto mt-6 max-w-96 md:flex-col md:h-96 mx-auto">
             {details?.images.map((image, index) => (
               <img
+                loading="lazy"
                 onClick={() => {
                   setSelectImage(index);
                 }}

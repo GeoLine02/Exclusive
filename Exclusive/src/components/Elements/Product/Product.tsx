@@ -9,8 +9,8 @@ type ProductType = {
 
 const Product = ({ image, alt, title, price, sale, oldPrice }: ProductType) => {
   return (
-    <div>
-      <img className="relative" src={image} alt={alt} />
+    <div className="p-3 border border-gray-200 shadow-xl rounded-lg">
+      <img loading="lazy" className="relative" src={image} alt={alt} />
       <h3>{title}</h3>
       <div className="absolute top-1 left-1">{sale}</div>
       <div>

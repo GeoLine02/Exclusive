@@ -8,7 +8,6 @@ import Button from "../ui/Button";
 import { UserType } from "../../types/user";
 import SlowServerWarning from "../warnings/SlowServerWarning";
 
-
 interface SignUpPropsType {
   handleSetUser: (fieldName: keyof UserType, value: string) => void;
   handleSignUp: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
@@ -16,25 +15,56 @@ interface SignUpPropsType {
   isLoading: boolean;
 }
 
-const SignUpForm = ({error, handleSetUser, handleSignUp, isLoading} : SignUpPropsType) => {
-
+const SignUpForm = ({
+  error,
+  handleSetUser,
+  handleSignUp,
+  isLoading,
+}: SignUpPropsType) => {
   return (
-      <div className="flex justify-center items-center md:flex md:gap-10">
+    <div className="flex justify-center items-center md:flex md:gap-10">
       <img
+        loading="lazy"
         className="hidden md:block max-h-[600px]"
         src={AuthSideImage}
         alt="auth side image"
       />
-    <Form onSubmit={handleSignUp} className="max-w-80" align="vertical">
-        
-          <h1 className="text-4xl font-medium">Create an account</h1>
-        
+      <Form onSubmit={handleSignUp} className="max-w-80" align="vertical">
+        <h1 className="text-4xl font-medium">Create an account</h1>
+
         <div className="flex flex-col gap-5 mt-8">
-          <Input name="userName" backgroundColor="none" underlined placeholder="Username" type="text" handleChange={(e) => handleSetUser("userName", e.target.value)} />     
-          <Input name="email" backgroundColor="none" underlined placeholder="Email" type="text" handleChange={(e) => handleSetUser("email", e.target.value)} />     
-          <Input name="password" backgroundColor="none" underlined placeholder="Passwrod" type="password" handleChange={(e) => handleSetUser("password", e.target.value)} />
+          <Input
+            name="userName"
+            backgroundColor="none"
+            underlined
+            placeholder="Username"
+            type="text"
+            handleChange={(e) => handleSetUser("userName", e.target.value)}
+          />
+          <Input
+            name="email"
+            backgroundColor="none"
+            underlined
+            placeholder="Email"
+            type="text"
+            handleChange={(e) => handleSetUser("email", e.target.value)}
+          />
+          <Input
+            name="password"
+            backgroundColor="none"
+            underlined
+            placeholder="Passwrod"
+            type="password"
+            handleChange={(e) => handleSetUser("password", e.target.value)}
+          />
         </div>
-        <Button type="submit" className="mt-6" align="horizontal" background="red" textColor="light">
+        <Button
+          type="submit"
+          className="mt-6"
+          align="horizontal"
+          background="red"
+          textColor="light"
+        >
           Sign Up
         </Button>
         <p className="mt-4">
@@ -44,20 +74,15 @@ const SignUpForm = ({error, handleSetUser, handleSignUp, isLoading} : SignUpProp
           </Link>
         </p>
         <div>
-          {isLoading && 
+          {isLoading && (
             <div className=" w-full flex justify-center items-center mt-10">
-          <ClipLoader size={30} color="#DB4444" />
-          <SlowServerWarning isLoading={isLoading} />
+              <ClipLoader size={30} color="#DB4444" />
+              <SlowServerWarning isLoading={isLoading} />
             </div>
-          }
-          {error &&
-           <p>
-              {error}
-           </p>
-           }  
+          )}
+          {error && <p>{error}</p>}
         </div>
-              
-    </Form>
+      </Form>
     </div>
   );
 };
